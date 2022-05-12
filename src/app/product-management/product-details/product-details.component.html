@@ -1,0 +1,59 @@
+<ng-container *ngIf="product$ | async as product; else noProductFound">
+    <div class="w-[1280px] mx-auto mt-14">
+        <div
+            class="text-3xl text-slate-700 font-medium flex justify-center pb-4 items-center"
+        >
+            {{ product.name }}
+            <ng-container *ngIf="!product.onSale"
+                ><div class="text-xl text-rose-900 pl-3">
+                    - currently not available -
+                </div></ng-container
+            >
+        </div>
+
+        <div
+            class="border border-slate-500 rounded-2xl bg-slate-50 flex shadow-material"
+        >
+            <img
+                [src]="product.imageUrl"
+                class="w-80 h-full border border-slate-700 m-8 shadow-lg"
+                [class.out-of-sale]="!product.onSale"
+            />
+            <div
+                class="m-8 grid grid-cols-[1fr_5fr] gap-4 text-slate-700 text-lg"
+            >
+                <div class="font-medium">Producer:</div>
+                <div>{{ product.producer }}</div>
+
+                <div class="font-medium">Price:</div>
+                <div>
+                    {{ product.price.value | number: '1.2-2' }}
+                    {{ product.price.currency }}
+                </div>
+
+                <div class="font-medium">Description:</div>
+                <span class="whitespace-pre">{{ product.description }}</span>
+
+                <div class="font-medium">Categories:</div>
+                <div class="flex">
+                    <div
+                        *ngFor="let category of categories$ | async"
+                        class="bg-slate-500 text-slate-50 rounded-md px-2 py-1 mx-2 text-sm cursor-pointer hover:bg-slate-700"
+                    >
+                        {{ category }}
+                    </div>
+                </div>
+            </div>
+            <div class="w-full flex justify-end p-4">
+                <button mat-icon-button class="text-slate-500">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-template #noProductFound>
+    <div class="text-3xl text-slate-700 flex justify-center pt-20">
+        Unknown product id please try again or contact our service desk!
+    </div>
+</ng-template>

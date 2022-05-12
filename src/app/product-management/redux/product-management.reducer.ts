@@ -46,6 +46,7 @@ export const productManagenementReducer = createReducer(
         (state): ProductManagementState => ({
             ...state,
             productLoading: true,
+            product: null,
         })
     ),
 
@@ -54,7 +55,7 @@ export const productManagenementReducer = createReducer(
         (state, { product }): ProductManagementState => ({
             ...state,
             productLoading: false,
-            productlistLoadingError: null,
+            productLoadingError: null,
             product,
         })
     ),
@@ -65,6 +66,7 @@ export const productManagenementReducer = createReducer(
             ...state,
             productLoading: false,
             productLoadingError: error,
+            product: null,
         })
     )
 )

@@ -1,0 +1,30 @@
+<div
+    [ngClass]="[
+        'flex',
+        'bg-slate-50 w-[900px] h-[160px]',
+        'border border-solid border-slate-700 rounded-lg',
+        'cursor-pointer',
+        'shadow-material'
+    ]"
+    matTooltip="Click for more details"
+    matTooltipPosition="right"
+    [routerLink]="['/products', productId]"
+>
+    <img
+        [src]="imageUrl"
+        class="w-60 rounded-l-lg border-r border-slate-700 shadow-lg"
+    />
+
+    <div class="flex flex-col text-slate-700 px-8 py-6">
+        <div class="product-text text-4xl">
+            <div class="font-medium overflow-hidden text-ellipsis">
+                {{ producer }}
+            </div>
+            <span class="px-2">-</span>
+            <div class="overflow-hidden text-ellipsis">{{ name }}</div>
+        </div>
+        <div class="pl-4 pt-6">
+            Price: {{ price.value | number: '1.2-2' }} {{ price.currency }}
+        </div>
+    </div>
+</div>

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
+import { ProductCardModule } from './product-card/product-card.module'
 import { ProductManagementComponent } from './product-management.component'
 import { ProductManagementEffects } from './redux/product-management.effects'
 import {
@@ -12,15 +13,15 @@ import { ProductManagementState } from './redux/product-management.state'
 
 @NgModule({
     declarations: [ProductManagementComponent],
-    entryComponents: [ProductManagementComponent],
     exports: [ProductManagementComponent],
     imports: [
         CommonModule,
+        EffectsModule.forFeature([ProductManagementEffects]),
+        ProductCardModule,
         StoreModule.forFeature<ProductManagementState>(
             productManagementFeatureKey,
             productManagenementReducer
         ),
-        EffectsModule.forFeature([ProductManagementEffects]),
     ],
 })
 export class ProductManagementModule {}

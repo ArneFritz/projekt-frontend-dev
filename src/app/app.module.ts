@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
+import { ProductDetailsModule } from './product-management/product-details/product-details.module'
 import { HeaderModule } from './shared/components/header/header.module'
 
 @NgModule({
@@ -16,6 +17,7 @@ import { HeaderModule } from './shared/components/header/header.module'
         AppRoutingModule,
         BrowserAnimationsModule,
         HeaderModule,
+        ProductDetailsModule,
         StoreModule.forRoot({}),
         StoreDevtoolsModule.instrument({}),
         EffectsModule.forRoot(),

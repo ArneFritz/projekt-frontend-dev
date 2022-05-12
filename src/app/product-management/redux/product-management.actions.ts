@@ -30,5 +30,5 @@ export const loadproductError = createAction(
 
 export const loadproductSuccess = createAction(
     '[ProductManagement] Load product success',
-    props<{ product: Product }>()
+    props<{ product: Product | null }>()
 )

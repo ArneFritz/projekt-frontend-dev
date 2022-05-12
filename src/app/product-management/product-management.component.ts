@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Subscription } from 'rxjs'
 import { loadProductlist } from './redux/product-management.actions'
@@ -9,20 +9,18 @@ import { selectProductlist } from './redux/product-management.selectors'
     templateUrl: './product-management.component.html',
     styleUrls: ['./product-management.component.scss'],
 })
-export class ProductManagementComponent implements OnInit {
+export class ProductManagementComponent implements OnInit, OnDestroy {
     subscriptions = new Subscription()
 
-    productlist$ = this.store.select(selectProductlist)
+    products$ = this.store.select(selectProductlist)
 
-    constructor(private store: Store) {
-        this.subscriptions.add(
-            this.productlist$.subscribe((productlist) =>
-                console.log(productlist)
-            )
-        )
-    }
+    constructor(private store: Store) {}
 
     ngOnInit(): void {
         this.store.dispatch(loadProductlist())
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.unsubscribe()
     }
 }
