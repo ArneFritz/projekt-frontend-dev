@@ -68,5 +68,35 @@ export const productManagenementReducer = createReducer(
             productLoadingError: error,
             product: null,
         })
+    ),
+
+    // Update
+
+    on(
+        ProductManagementActions.updateProduct,
+        (state): ProductManagementState => ({
+            ...state,
+            productLoading: true,
+            productLoadingError: null,
+        })
+    ),
+
+    on(
+        ProductManagementActions.updateProductError,
+        (state, { error }): ProductManagementState => ({
+            ...state,
+            productLoading: false,
+            productLoadingError: error,
+        })
+    ),
+
+    on(
+        ProductManagementActions.updateProductSuccess,
+        (state, { productValues }): ProductManagementState => ({
+            ...state,
+            productLoading: false,
+            productLoadingError: null,
+            product: { ...state.product, ...productValues },
+        })
     )
 )

@@ -10,6 +10,9 @@ import {
     loadproductlistError,
     loadproductlistSuccess,
     loadproductSuccess,
+    updateProduct,
+    updateProductError,
+    updateProductSuccess,
 } from './product-management.actions'
 
 @Injectable()
@@ -41,6 +44,22 @@ export class ProductManagementEffects {
                         })
                     ),
                     catchError((error) => of(loadproductError({ error })))
+                )
+            )
+        )
+    })
+
+    updateProduct$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(updateProduct),
+            mergeMap(({ product }) =>
+                this.productService.updateProduct(product).pipe(
+                    map((productValues) =>
+                        updateProductSuccess({
+                            productValues,
+                        })
+                    ),
+                    catchError((error) => of(updateProductError({ error })))
                 )
             )
         )

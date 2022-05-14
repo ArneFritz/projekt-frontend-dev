@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable, of } from 'rxjs'
+import { delay, Observable, of } from 'rxjs'
 import { Currency } from '../shared/shared.model'
 import { Category, Product, Productlist } from './product-management.model'
 
@@ -86,11 +86,12 @@ export const productWatchResponseMock: Product = {
     providedIn: 'root',
 })
 export class ProductManagementService {
-    //constructor(private http: HttpClient) {}
+    // constructor(private http: HttpClient) {}
 
     getProductlist(): Observable<Productlist> {
         //return this.http.get<Productlist>('https://hired/products/productlist')
-        return of(productlistResponseMock)
+
+        return of(productlistResponseMock).pipe(delay(700))
     }
 
     getProduct(productId: string | null): Observable<Product | null> {
@@ -98,13 +99,24 @@ export class ProductManagementService {
 
         switch (productId) {
             case '2348R7-R3423':
-                return of(productShoeResponseMock)
+                return of(productShoeResponseMock).pipe(delay(700))
             case '8PP432-DD342':
-                return of(productHeadphoneResponseMock)
+                return of(productHeadphoneResponseMock).pipe(delay(700))
             case '67PT5W-E12TT':
-                return of(productWatchResponseMock)
+                return of(productWatchResponseMock).pipe(delay(700))
             default:
-                return of(null)
+                return of(null).pipe(delay(700))
         }
+    }
+
+    updateProduct(productValues: Partial<Product>) {
+        console.log(productValues)
+
+        // return this.http.patch<void>(
+        //     `https://hired/products/${product.productId}`,
+        //     productValues
+        // )
+
+        return of(productValues).pipe(delay(700))
     }
 }

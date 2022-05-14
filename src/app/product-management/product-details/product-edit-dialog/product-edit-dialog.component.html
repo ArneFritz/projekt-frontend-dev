@@ -1,0 +1,107 @@
+<div class="mx-auto text-center text-slate-700 text-xl">
+    Edit - {{ data.product.name }}
+</div>
+
+<form [formGroup]="editFormGroup">
+    <div class="flex flex-col gap-4 p-8">
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input
+                matInput
+                formControlName="name"
+                required
+                aria-label="update product name"
+            />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Producer</mat-label>
+            <input
+                matInput
+                formControlName="producer"
+                required
+                aria-label="update producer"
+            />
+        </mat-form-field>
+        <div class="flex justify-between items-baseline">
+            <mat-form-field appearance="outline">
+                <mat-label>Price</mat-label>
+                <input
+                    matInput
+                    formControlName="priceValue"
+                    placeholder="00.00"
+                    required
+                    pattern="^\d*\.?\d{0,2}$"
+                    aria-label="update price value"
+                />
+                <mat-error
+                    *ngIf="checkFormControlForError('priceValue', 'pattern')"
+                >
+                    Please use decimal number, e.g. 0.00
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Currency</mat-label>
+                <mat-select
+                    formControlName="currency"
+                    aria-label="choose currency"
+                    ><mat-option [value]="Currency.EUR">{{
+                        Currency.EUR
+                    }}</mat-option
+                    ><mat-option [value]="Currency.USD">{{
+                        Currency.USD
+                    }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-slide-toggle
+                formControlName="onSale"
+                [checked]="editFormGroup.get('onSale')?.value || false"
+                aria-label="toogle on sale"
+                >on sale</mat-slide-toggle
+            >
+        </div>
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea
+                class="min-h-[220px]"
+                matInput
+                formControlName="description"
+                aria-label="update product description"
+            ></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Categories</mat-label>
+            <mat-select
+                formControlName="categories"
+                multiple
+                aria-label="choose categories"
+            >
+                <mat-option
+                    *ngFor="let category of Categories"
+                    [value]="category"
+                    >{{ category }}</mat-option
+                >
+            </mat-select>
+        </mat-form-field>
+        <div class="flex justify-end w-full gap-4">
+            <button
+                mat-raised-button
+                (click)="closeDialog()"
+                aria-label="close dialog"
+            >
+                Cancel
+            </button>
+            <button
+                mat-raised-button
+                color="primary"
+                (click)="submitChanges()"
+                [disabled]="
+                    editFormGroup.invalid ||
+                    (haveValueChanged$ | async) === false
+                "
+                aria-label="save changes"
+            >
+                Save
+            </button>
+        </div>
+    </div>
+</form>

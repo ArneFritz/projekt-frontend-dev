@@ -9,6 +9,7 @@
     matTooltip="Click for more details"
     matTooltipPosition="right"
     [routerLink]="['/products', productId]"
+    aria-label="open product details"
 >
     <img
         [src]="imageUrl"
@@ -24,7 +25,8 @@
             <div class="overflow-hidden text-ellipsis">{{ name }}</div>
         </div>
         <div class="pl-4 pt-6">
-            Price: {{ price.value | number: '1.2-2' }} {{ price.currency }}
+            Price:
+            {{ price?.value | currency: price?.currency:'symbol':'1.2-2' }}
         </div>
     </div>
 </div>

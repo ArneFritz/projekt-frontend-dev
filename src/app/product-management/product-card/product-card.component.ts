@@ -7,15 +7,15 @@ import { Currency, Price } from 'src/app/shared/shared.model'
     styleUrls: ['./product-card.component.scss'],
 })
 export class ProductCardComponent {
-    @Input() name = ''
+    @Input() name?: string
 
-    @Input() productId = ''
+    @Input() productId?: string
 
-    @Input() producer = ''
+    @Input() producer?: string
 
-    @Input() price: Price = { value: 0, currency: Currency.EUR }
+    @Input() price?: Price = { value: 0, currency: Currency.EUR }
 
-    @Input() onSale = false
+    @Input() onSale? = false
 
-    @Input() imageUrl = ''
+    @Input() imageUrl?: string
 }

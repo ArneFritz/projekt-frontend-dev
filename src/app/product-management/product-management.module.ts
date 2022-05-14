@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
 import { ProductCardModule } from './product-card/product-card.module'
@@ -17,6 +18,7 @@ import { ProductManagementState } from './redux/product-management.state'
     imports: [
         CommonModule,
         EffectsModule.forFeature([ProductManagementEffects]),
+        MatProgressBarModule,
         ProductCardModule,
         StoreModule.forFeature<ProductManagementState>(
             productManagementFeatureKey,

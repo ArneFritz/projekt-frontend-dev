@@ -32,3 +32,19 @@ export const loadproductSuccess = createAction(
     '[ProductManagement] Load product success',
     props<{ product: Product | null }>()
 )
+
+// Update Product
+export const updateProduct = createAction(
+    '[ProductManagement] Update product',
+    props<{ product: Partial<Product> }>()
+)
+
+export const updateProductError = createAction(
+    '[ProductManagement] Update product error',
+    props<{ error: Error | string }>()
+)
+
+export const updateProductSuccess = createAction(
+    '[ProductManagement] Update product success',
+    props<{ productValues: Partial<Product> | null }>()
+)

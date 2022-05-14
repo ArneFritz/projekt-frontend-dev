@@ -1,12 +1,12 @@
 import { Price } from '../shared/shared.model'
 
 export interface Product {
-    productId: string
-    name: string
-    onSale: boolean
-    producer: string
-    imageUrl: string
-    price: Price
+    productId?: string
+    name?: string
+    onSale?: boolean
+    producer?: string
+    imageUrl?: string
+    price?: Price
     description?: string
     categories?: Category[]
 }

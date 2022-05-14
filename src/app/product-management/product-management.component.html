@@ -1,12 +1,22 @@
-<div class="flex flex-col gap-14 items-center pt-14">
-    <ng-container *ngFor="let product of products$ | async">
-        <app-product-card
-            [name]="product.name"
-            [producer]="product.producer"
-            [productId]="product.productId"
-            [price]="product.price"
-            [onSale]="product.onSale"
-            [imageUrl]="product.imageUrl"
-        ></app-product-card>
-    </ng-container>
-</div>
+<ng-container *ngIf="loading$ | async; else error">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-container>
+<ng-template #error>
+    <div *ngIf="error$ | async as error; else content">
+        {{ error }}
+    </div>
+</ng-template>
+<ng-template #content>
+    <div class="flex flex-col gap-14 items-center pt-14">
+        <ng-container *ngFor="let product of productlist$ | async">
+            <app-product-card
+                [name]="product.name"
+                [producer]="product.producer"
+                [productId]="product.productId"
+                [price]="product.price"
+                [onSale]="product.onSale"
+                [imageUrl]="product.imageUrl"
+            ></app-product-card>
+        </ng-container>
+    </div>
+</ng-template>
